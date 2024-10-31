@@ -149,22 +149,19 @@ async def timer(ctx: SlashContext):
     name="joke",
     description="Tells a programming joke."
 )
-async def tell_joke(ctx: SlashContext):
-    # URL for the JokeAPI
-    api = "https://v2.jokeapi.dev/joke/Programming"
-
+#use embed to tell joke
+async def joke(ctx: SlashContext):
+    """Command to tell a programming joke."""
     async with aiohttp.ClientSession() as session:
-        async with session.get(api) as response:
-            if response.status == 200:
-                joke_data = await response.json()
-                # Check the type of joke and format the response
-                if joke_data['type'] == 'single':
-                    joke = joke_data['joke']
-                else:
-                    joke = f"{joke_data['setup']} - {joke_data['delivery']}"
-                await ctx.send(joke)
-            else:
-                await ctx.send("Sorry, I couldn't fetch a joke at the moment.")
-                
+        async with session.get("https://v2.jokeapi.dev/joke/Programming?type=single") as r:
+            r.raise_for_status()
+            data = await r.json()
+            embed = Embed(
+                title="Joke",
+                description=data["joke"],
+                color=interactions.Color.random()
+            )
+            await ctx.send(embeds=embed)
+
 # Start the bot
 bot.start()
