@@ -109,7 +109,7 @@ async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None, color:
     img.save(buffer, format="PNG")  # Save the image in PNG format
     buffer.seek(0)  # Move to the start of the BytesIO buffer
 
-    file = File(file=buffer, filename="qr.png")  # Create a file object for the image
+    file = File(file=buffer, file_name="qr.png")  # Create a file object for the image
     qrembed = Embed(
         title="QR Code",
         description=f"Here is your QR code for {link}",  # Description of the embed
