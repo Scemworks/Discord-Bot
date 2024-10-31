@@ -25,6 +25,15 @@ async def on_ready():
     print("Bot is ready!")
 
 @slash_command(
+    name="hello",
+    description="Says hello"
+)
+async def hello(ctx: SlashContext):
+    await ctx.send(
+        f"Hello {ctx.author.mention}!"
+)
+
+@slash_command(
     name="ping",
     description="Ping and get latency of the bot"
 )
