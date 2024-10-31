@@ -158,7 +158,7 @@ async def joke(ctx: SlashContext):
             data = await r.json()
             embed = Embed(
                 title="Joke",
-                description=data["joke"],
+                description=data["joke"] if data["type"] == "single" else data["setup"] + "\n" + data["delivery"],
                 color=interactions.Color.random()
             )
             await ctx.send(embeds=embed)
