@@ -163,5 +163,22 @@ async def joke(ctx: SlashContext):
             )
             await ctx.send(embeds=embed)
 
+#help command using embed
+@slash_command(
+    name="help",
+    description="Lists all available commands along with short description on how to use them."
+)
+async def help(ctx: SlashContext):
+    """Command to list all available commands along with short description on how to use them."""
+    embed = Embed(
+        title="Help",
+        description="Here are all available commands:\n"
+                    "/hello: Greet users with a personalized message.\n"
+                    "/ping: Check the bot's latency.\n"
+                    "/qr: Create QR codes from text or links, with optional logo support.\n"
+                    "/timer: Create a random timer between 1 and 60 seconds.\n"
+                    "/joke: Tells a programming joke.",
+        color=interactions.Color.random())
+    await ctx.send(embeds=embed)
 # Start the bot
 bot.start()
