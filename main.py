@@ -121,18 +121,11 @@ async def timer(ctx: SlashContext):
     tembed.set_footer(text=f"Requested by {ctx.author}\n {datetime.datetime.now()}")
     msg = await ctx.send(embeds=tembed)
     await asyncio.sleep(time)
-    for timer in range(time, 0, timer-1):
-        tembed_1=Embed(
-            title="Timer",
-            description=f"TImer is ending in {timer} seconds",
-            color=interactions.Color.random()
-        )
-        msg2 = await msg.edit(embeds=tembed_1)
 
-    tembed_2 = Embed(
+    tembed_1 = Embed(
         title="Timer",
         description=f"Timer ended {ctx.author.mention}",
         color=interactions.Color.random()
     )
-    await msg2.edit(embeds=tembed_2)
+    await msg1.edit(embeds=tembed_1)
 bot.start()
