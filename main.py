@@ -121,7 +121,7 @@ async def timer(ctx: SlashContext):
     tembed.set_footer(text=f"Requested by {ctx.author}\n {datetime.datetime.now()}")
     await ctx.send(embeds=tembed)
     await asyncio.sleep(time)
-    tembed.edit(
+    tembed = Embed(
         title="Timer",
         description=f"Timer ended {ctx.author.mention}",
         color=interactions.Color.red()
