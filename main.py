@@ -124,7 +124,7 @@ async def timer(ctx: SlashContext):
     tembed = Embed(
         title="Timer",
         description=f"Timer ended {ctx.author.mention}",
-        color=interactions.Color.red()
+        color=interactions.Color.random()
     )
     #await ctx.send(embeds=tembed)
 bot.start()
