@@ -127,7 +127,7 @@ async def timer(ctx: SlashContext):
         description=f"Timer ended!",
         color=interactions.Color.random()
     )
-    tembed_1.set_footer(text=f"{ctx.author.mention}")
+    tembed_1.set_footer(text=f"{ctx.author}")
     await msg1.edit(embeds=tembed_1)
     print(f"{msg1} edited")
 bot.start()
