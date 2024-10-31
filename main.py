@@ -143,5 +143,28 @@ async def timer(ctx: SlashContext):
     await msg1.edit(embeds=tembed_1)  # Edit the original message to indicate that the timer has ended
     print(f"{msg1} edited")  # Print to console for debugging
 
+
+#using jokeapi create comand to pull programming jokes
+@slash_command(
+    name="joke",
+    description="Tells a programming joke."
+)
+async def tell_joke(ctx: SlashContext):
+    # URL for the JokeAPI
+    api = "https://v2.jokeapi.dev/joke/Programming"
+
+    async with aiohttp.ClientSession() as session:
+        async with session.get(api) as response:
+            if response.status == 200:
+                joke_data = await response.json()
+                # Check the type of joke and format the response
+                if joke_data['type'] == 'single':
+                    joke = joke_data['joke']
+                else:
+                    joke = f"{joke_data['setup']} - {joke_data['delivery']}"
+                await ctx.send(joke)
+            else:
+                await ctx.send("Sorry, I couldn't fetch a joke at the moment.")
+                
 # Start the bot
 bot.start()
