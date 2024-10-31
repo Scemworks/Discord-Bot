@@ -47,14 +47,6 @@ async def ping(ctx: SlashContext):
     )
     await ctx.send(embeds=[pingembed])  # Send the embed as a response
 
-from io import BytesIO
-import datetime
-import aiohttp
-from PIL import Image
-import qrcode as qr_lib
-from discord import File, Embed
-from SlashContext import SlashContext, slash_command, slash_option, OptionType
-
 @slash_command(
     name="qr",
     description="Generate a QR code from given text/link and add logo if specified"
