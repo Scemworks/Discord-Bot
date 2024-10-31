@@ -94,5 +94,30 @@ async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None):
     qrembed.set_image(url="attachment://qr.png")
     qrembed.set_footer(text=f"Requested by {ctx.author}\n {datetime.datetime.now()}")
     await ctx.send(embeds=qrembed, files=file)
-                    
+
+#DM a mentioned user
+@slash_command(
+    name="message_dm",
+    description="DMs mentioned user with the given message"
+)
+@slash_option(
+    name="message",
+    description="Message to send",
+    opt_type=OptionType.STRING,
+    required=True
+)
+@slash_option(
+    name="user",
+    description="User to DM",
+    opt_type=OptionType.USER,
+    required=True
+)
+async def dm(ctx: SlashContext, message: str, user: User):
+    sembed = Embed(
+        title="Custom message",
+        description=message,
+    )
+    sembed.set_footer(text=f"Sent to you by {ctx.author}\n {datetime.datetime.now()}")
+    await user.send(embeds=sembed)
+     
 bot.start()
