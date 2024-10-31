@@ -6,6 +6,8 @@ from io import BytesIO
 import aiohttp
 import os
 import datetime
+import random
+import asyncio
 
 import os
 
@@ -95,29 +97,15 @@ async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None):
     qrembed.set_footer(text=f"Requested by {ctx.author}\n {datetime.datetime.now()}")
     await ctx.send(embeds=qrembed, files=file)
 
-#DM a mentioned user
+#Random timer creator
 @slash_command(
-    name="message_dm",
-    description="DMs mentioned user with the given message"
+    name="timer",
+    description="Creates a random timer"
 )
-@slash_option(
-    name="message",
-    description="Message to send",
-    opt_type=OptionType.STRING,
-    required=True
-)
-@slash_option(
-    name="user",
-    description="User to DM",
-    opt_type=OptionType.USER,
-    required=True
-)
-async def dm(ctx: SlashContext, message: str, user: User):
-    sembed = Embed(
-        title="Custom message",
-        description=message,
-    )
-    sembed.set_footer(text=f"Sent to you by {ctx.author}\n {datetime.datetime.now()}")
-    await user.send(embeds=sembed)
-     
+async def timer(ctx: SlashContext):
+    time = random.randint(1, 60)
+    await ctx.send(f"A random timer has been set for {time} seconds.")
+
+    await asyncio.sleep(time)
+    await ctx.send(f"Timer finished! {ctx.author.mention}")
 bot.start()
