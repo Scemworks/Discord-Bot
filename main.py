@@ -63,7 +63,13 @@ async def ping(ctx: SlashContext):
     opt_type=OptionType.STRING,
     required=False
 )
-async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None):
+@slash_option(
+    name="color",
+    description="Color of QR code",
+    opt_type=OptionType.STRING,
+    required=False
+)
+async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None, color: str = None):
     """Command to generate a QR code with an optional logo."""
     # Generate QR code
     qr = qr_lib.QRCode(
@@ -74,7 +80,7 @@ async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None):
     )
     qr.add_data(link)  # Add the link or text to the QR code
     qr.make(fit=True)  # Optimize QR code size
-    img = qr.make_image(fill_color="black", back_color="white").convert("RGB")  # Create the QR code image
+    img = qr.make_image(fill_color="black", back_color="white" if fill_color is None else color).convert("RGB")  # Generate the QR code image
     
     # Add logo if provided
     if logo_url: 
