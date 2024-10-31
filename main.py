@@ -109,7 +109,7 @@ async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None):
 #Random timer creator
 @slash_command(
     name="timer",
-    description="Creates a random timer"
+    description="Creates a random timer from 1 to 60 seconds"
 )
 async def timer(ctx: SlashContext):
     time = random.randint(1, 60)
