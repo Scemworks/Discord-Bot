@@ -128,5 +128,4 @@ async def timer(ctx: SlashContext):
         color=interactions.Color.random()
     )
     await msg1.edit(embeds=tembed_1)
-    print()
 bot.start()
