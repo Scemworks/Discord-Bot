@@ -113,8 +113,18 @@ async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None):
 )
 async def timer(ctx: SlashContext):
     time = random.randint(1, 60)
-    await ctx.send(f"A random timer has been set for {time} seconds.")
-
+    tembed = Embed(
+        title="Timer",
+        description=f"Timer created for {time} seconds",
+        color=interactions.Color.random()
+    )
+    tembed.set_footer(text=f"Requested by {ctx.author}\n {datetime.datetime.now()}")
+    await ctx.send(embeds=tembed)
     await asyncio.sleep(time)
-    await ctx.send(f"Timer finished! {ctx.author.mention}")
+    tembed.edit(
+        title="Timer",
+        description=f"Timer ended {ctx.author.mention}",
+        color=interactions.Color.red()
+    )
+    #await ctx.send(embeds=tembed)
 bot.start()
