@@ -47,6 +47,14 @@ async def ping(ctx: SlashContext):
     )
     await ctx.send(embeds=[pingembed])  # Send the embed as a response
 
+from io import BytesIO
+import datetime
+import aiohttp
+from PIL import Image
+import qrcode as qr_lib
+from discord import File, Embed
+from SlashContext import SlashContext, slash_command, slash_option, OptionType
+
 @slash_command(
     name="qr",
     description="Generate a QR code from given text/link and add logo if specified"
@@ -80,7 +88,9 @@ async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None, color:
     )
     qr.add_data(link)  # Add the link or text to the QR code
     qr.make(fit=True)  # Optimize QR code size
-    img = qr.make_image(fill_color="black", back_color="white" if fill_color is None else color).convert("RGB")  # Generate the QR code image
+    
+    # Use specified color, default to black if none provided
+    img = qr.make_image(fill_color=color or "black", back_color="white").convert("RGB")
     
     # Add logo if provided
     if logo_url: 
@@ -107,14 +117,14 @@ async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None, color:
     img.save(buffer, format="PNG")  # Save the image in PNG format
     buffer.seek(0)  # Move to the start of the BytesIO buffer
 
-    file = File(file=buffer, file_name="qr.png")  # Create a file object for the image
+    file = File(file=buffer, filename="qr.png")  # Create a file object for the image
     qrembed = Embed(
         title="QR Code",
         description=f"Here is your QR code for {link}",  # Description of the embed
     )
     qrembed.set_image(url="attachment://qr.png")  # Set the QR code image in the embed
-    qrembed.set_footer(text=f"Requested by {ctx.author}\n {datetime.datetime.now()}")  # Footer with user info
-    await ctx.send(embeds=qrembed, files=file)  # Send the embed and file
+    qrembed.set_footer(text=f"Requested by {ctx.author}\n{datetime.datetime.now()}")  # Footer with user info
+    await ctx.send(embed=qrembed, file=file)  # Send the embed and file
 
 @slash_command(
     name="timer",
