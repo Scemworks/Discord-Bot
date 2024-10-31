@@ -119,7 +119,7 @@ async def timer(ctx: SlashContext):
         color=interactions.Color.random()
     )
     tembed.set_footer(text=f"Requested by {ctx.author}\n {datetime.datetime.now()}")
-    msg = await ctx.send(embeds=tembed)
+    msg1 = await ctx.send(embeds=tembed)
     await asyncio.sleep(time)
 
     tembed_1 = Embed(
@@ -128,4 +128,5 @@ async def timer(ctx: SlashContext):
         color=interactions.Color.random()
     )
     await msg1.edit(embeds=tembed_1)
+    print()
 bot.start()
