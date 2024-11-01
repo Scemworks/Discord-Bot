@@ -254,7 +254,12 @@ async def fortune(ctx: SlashContext):
 )
 async def dm(ctx: SlashContext, user: User, message: str):
     """Command to send a message through DMs."""
-    await user.send(message)
+    membed = Embed(
+        title="DM",
+        description=f"Message to {user.mention} from {ctx.author}"
+    )
+    membed.add_field(name="Message", value=message, inline=False)
+    await user.send(embeds=membed)
     await ctx.send(f"Message sent to {user.mention}")
 # Start the bot
 bot.start()
