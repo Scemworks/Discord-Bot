@@ -172,7 +172,7 @@ async def joke(ctx: SlashContext):
     name="command",
     description="The command to get help for",
     required=False,
-    OptionType=OptionType.STRING
+    opt_type=OptionType.STRING
 )
 
 async def help(ctx: SlashContext, command: str = None):
