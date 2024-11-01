@@ -74,8 +74,8 @@ This token is necessary for authenticating the bot on Discord.
 
    - **/hello**: The bot will greet you.
    - **/ping**: Get the latency of the bot.
-   - **/qr**: Generate a QR code from a link or text (optional: include a logo).
-     - Example: `/qr link:https://example.com logo_url:https://example.com/logo.png`
+   - **/qr**: Generate a QR code from a link or text (optional: include a logo and change color of qr code).
+     - Example: `/qr link:https://example.com logo_url:https://example.com/logo.png color:red`
    - **/timer**: Set a random timer from 1 to 60 seconds.
    - **/joke**: Get a random programming joke 
 ## Contributing
