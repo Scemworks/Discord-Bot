@@ -261,5 +261,36 @@ async def dm(ctx: SlashContext, user: User, message: str):
     membed.add_field(name="Message", value=message, inline=False)
     await user.send(embeds=membed)
     await ctx.send(f"Message sent to {user.mention}")
+
+@slash_command(
+    name="embed",
+    description="Create an embed with a title, description, and color."
+)
+@slash_option(
+    name="title",
+    description="Title of the embed",
+    opt_type=OptionType.STRING,
+    required=True
+)
+@slash_option(
+    name="description",
+    description="Description of the embed",
+    opt_type=OptionType.STRING,
+    required=True
+)
+@slash_option(
+    name="color",
+    description="Color of the embed",
+    opt_type=OptionType.STRING,
+    required=False
+)
+async def embed(ctx: SlashContext, title: str, description: str, color: str = None):
+    """Command to create an embed with a title, description, and color."""
+    embed = Embed(
+        title=title,
+        description=description,
+        color=interactions.Color.random() if color is None else int(color, 16)
+)
+)
 # Start the bot
 bot.start()
