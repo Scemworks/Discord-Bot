@@ -291,6 +291,6 @@ async def embed(ctx: SlashContext, title: str, description: str, color: str = No
         description=description,
         color=interactions.Color.random() if color is None else int(color, 16)
 )
-)
+
 # Start the bot
 bot.start()
