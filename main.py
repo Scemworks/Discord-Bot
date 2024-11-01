@@ -123,7 +123,7 @@ async def generate_qr(ctx: SlashContext, link: str, logo_url: str = None, color:
         description=f"Here is your QR code for {link}",  # Description of the embed
     )
     qrembed.set_image(url="attachment://qr.png")  # Set the QR code image in the embed
-    qrembed.set_footer(text=f"Requested by {ctx.author.mention}\n{datetime.datetime.now()}")  # Footer with user info
+    qrembed.set_footer(text=f"Requested by {ctx.author}\n{datetime.datetime.now()}")  # Footer with user info
     await ctx.send(embed=qrembed, file=file)  # Send the embed and file
 
 @slash_command(
