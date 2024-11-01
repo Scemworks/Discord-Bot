@@ -41,7 +41,7 @@ A Discord bot built with the `interactions.py` library that provides various com
    Create a `.env` file in the root of your project and add your Discord bot token:
 
    ```plaintext
-   TOKEN=your_bot_token_here
+   TOKEN="your_bot_token_here"
    ```
 
 ## Usage
