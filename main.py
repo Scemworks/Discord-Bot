@@ -233,5 +233,28 @@ async def fortune(ctx: SlashContext):
     embed.set_footer(text=f"Requested by {ctx.author}\n{datetime.datetime.now()}")
     #Send fortune as dm
     await ctx.author.send(embeds=embed)
+
+
+#dm to mentioned user
+@slash_command(
+    name="dm",
+    description="DMs a user with a message."
+)
+@slash_option(
+    name="user",
+    description="User to DM",
+    opt_type=OptionType.USER,
+    required=True
+)
+@slash_option(
+    name="message",
+    description="Message to send",
+    opt_type=OptionType.STRING,
+    required=True
+)
+async def dm(ctx: SlashContext, user: User, message: str):
+    """Command to send a message through DMs."""
+    await user.send(message)
+    await ctx.send(f"Message sent to {user.mention}")
 # Start the bot
 bot.start()
