@@ -229,7 +229,7 @@ async def fortune(ctx: SlashContext):
         description="Here is your fortune:",
         color=interactions.Color.random()
     )
-    embed.add_field(name="Fortune", value=random.choice(fortunes), inline=False)
+    embed.add_field(name="\n", value=random.choice(fortunes), inline=False)
     embed.set_footer(text=f"Requested by {ctx.author}\n{datetime.datetime.now()}")
     await ctx.send(embeds=embed)
 
