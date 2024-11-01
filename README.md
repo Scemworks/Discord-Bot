@@ -65,7 +65,7 @@ A Discord bot built with the `interactions.py` library that provides various com
    - **/qr**: Generate a QR code from a link or text (optional: include a logo).
      - Example: `/qr link:https://example.com logo_url:https://example.com/logo.png`
    - **/timer**: Set a random timer from 1 to 60 seconds.
-
+   - **/joke**: Get a random programming joke fetched using jokeapi
 ## Contributing
 
 Contributions are welcome! If you would like to contribute, please fork the repository and submit a pull request.
