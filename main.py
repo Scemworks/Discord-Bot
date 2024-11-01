@@ -13,6 +13,13 @@ import asyncio  # Import asyncio for asynchronous programming
 from dotenv import load_dotenv
 load_dotenv()
 
+
+#Txt to hex function
+def txt_to_hex_color(txt):
+    hash_code= hash(txt)& 0xFFFFFF
+    hex_color = "#{hash_code:06x}"
+    return hex_color
+
 # Get the bot token from environment variables
 token = os.getenv("TOKEN")
 
@@ -285,11 +292,11 @@ async def dm(ctx: SlashContext, user: User, message: str):
     required=False
 )
 async def embed(ctx: SlashContext, title: str, description: str, color: str = None):
-    """Command to create an embed with a title, description, and color."""
+    """Command to create an embed with a title, description, and color( using txt_to_hex_color function)."""
     embed = Embed(
         title=title,
         description=description,
-        color=interactions.Color.random() if color is None else color
+        color=interactions.Color.random() if color is None else txt_to_hex_color(color)
     )
     await ctx.send(embeds=embed)
 
