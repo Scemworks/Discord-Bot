@@ -16,10 +16,9 @@ load_dotenv()
 
 #Txt to hex function
 def txt_to_hex_color(txt):
-    hash_code= hash(txt)& 0xFFFFFF
-    hex_color = "#{hash_code:06x}"
-    return hex_color
-
+    """Convert a string to a hex color code."""
+    return int(hash(txt), 16)
+    
 # Get the bot token from environment variables
 token = os.getenv("TOKEN")
 
