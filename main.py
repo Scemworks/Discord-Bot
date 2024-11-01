@@ -231,7 +231,8 @@ async def fortune(ctx: SlashContext):
     )
     embed.add_field(name="\n", value=random.choice(fortunes), inline=False)
     embed.set_footer(text=f"Requested by {ctx.author}\n{datetime.datetime.now()}")
-    await ctx.send(embeds=embed)
-
+    #Send fortune as dm
+    dm_1 = await ctx.author.create_dm()
+    await dm_1.send(embeds=embed)
 # Start the bot
 bot.start()
