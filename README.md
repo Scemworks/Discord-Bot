@@ -52,7 +52,7 @@ A Discord bot built with the `interactions.py` library that provides various com
 2. Click on **New Application** and give your bot a name.
 3. Navigate to **Bot** on the left sidebar and click **Add Bot**.
 4. Under **Token**, click **Reset Token** to reveal it. Copy the token securely.
-5. Store the token in your environment file as mentioned above.
+5. Store the token in your environment file as mentioned above in **`Step 3`**
 
 This token is necessary for authenticating the bot on Discord.
 
