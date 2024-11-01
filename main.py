@@ -30,10 +30,19 @@ async def on_ready():
     name="hello",
     description="Says hello"
 )
-async def hello(ctx: SlashContext):
-    """Command that greets the user."""
-    await ctx.send(f"Hello {ctx.author.mention}!")  # Send a greeting message mentioning the user
-
+@slash_option(
+    name="user",
+    description="User to greet",
+    opt_type=OptionType.USER,
+    required=False
+)
+async def hello(ctx: SlashContext, user: User = None):
+    """Command that greets the user through dm."""
+    dm = await ctx.user.create_dm()  # Create a DM with the user
+    if user:
+        await dm.send(f"Hello {user.mention}!")  # Send a message in the DM
+    else:
+        await dm.send("Hello!")  # Send a message in the DM
 @slash_command(
     name="ping",
     description="Ping and get latency of the bot"
