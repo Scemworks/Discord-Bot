@@ -8,6 +8,7 @@ A Discord bot built with the `interactions.py` library that provides various com
 - **Ping Command**: Check the bot's latency.
 - **QR Code Generator**: Create QR codes from text or links, with optional logo support.
 - **Random Timer**: Set a random timer between 1 and 60 seconds and get notified when it ends.
+- **Programming Jokes**: Random programming jokes
 
 ## Prerequisites
 
