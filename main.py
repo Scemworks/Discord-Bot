@@ -220,6 +220,13 @@ async def help(ctx: SlashContext, command: str = None):
 )
 async def invite(ctx: SlashContext):
     """Command to invite the bot to your server."""
-    await ctx.send(f"Invite the bot to your server with this link: {await ctx.send "https://discord.com/oauth2/authorize?client_id=943175577265905745&permissions=8&integration_type=0&scope=bot"}")
+    inembed = Embed(
+        title="Invite",
+        description="Invite the bot to your server by clicking on the link below:",
+        color=interactions.Color.random()
+    )
+    inembed.add_field(name="Invite Link", value=f"[Click Here](https://discord.com/oauth2/authorize?client_id=943175577265905745&permissions=8&integration_type=0&scope=bot)", inline=False)
+    await ctx.send(embeds=inembed)
+
 # Start the bot
 bot.start()
