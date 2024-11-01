@@ -13,12 +13,6 @@ import asyncio  # Import asyncio for asynchronous programming
 from dotenv import load_dotenv
 load_dotenv()
 
-
-#Txt to hex function
-def txt_to_hex_color(txt):
-    """Convert a string to a hex color code."""
-    return int(hash(txt), 16)
-    
 # Get the bot token from environment variables
 token = os.getenv("TOKEN")
 
@@ -284,20 +278,35 @@ async def dm(ctx: SlashContext, user: User, message: str):
     opt_type=OptionType.STRING,
     required=True
 )
-@slash_option(
-    name="color",
-    description="Color of the embed",
-    opt_type=OptionType.STRING,
-    required=False
-)
+
 async def embed(ctx: SlashContext, title: str, description: str, color: str = None):
-    """Command to create an embed with a title, description, and color( using txt_to_hex_color function)."""
+    """Command to create an embed with a title, description."""
     embed = Embed(
         title=title,
         description=description,
-        color=interactions.Color.random() if color is None else txt_to_hex_color(color)
+        color=interactions.Color.random()
     )
     await ctx.send(embeds=embed)
 
+#Random cat image and facts
+@slash_command(
+    name="cat",
+    description="Sends a random cat image and fact."
+)
+async def cat(ctx: SlashContext):
+    """Command to send a random cat image and fact."""
+    cat_embed = Embed(
+        title="Random Cat",
+        color=interactions.Color.random()
+    )
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://api.thecatapi.com/v1/images/search") as r:
+            cat = (await r.json())[0]
+            cat_embed.set_image(url=cat["url"])
+            async with session.get(f"https://catfact.ninja/fact?max_length=140") as r:
+                fact = (await r.json())["fact"]
+                cat_embed.add_field(name="Fact", value=fact, inline=False)
+                cat_embed.set_image(url=cat["url"])
+    await ctx.send(embeds=cat_embed)
 # Start the bot
 bot.start()
