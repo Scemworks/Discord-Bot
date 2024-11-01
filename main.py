@@ -256,7 +256,7 @@ async def dm(ctx: SlashContext, user: User, message: str):
     """Command to send a message through DMs."""
     membed = Embed(
         title="DM",
-        description=f"Message to {user.mention} from {ctx.author}"
+        description=f"Message to {user.mention} from {ctx.author.mention}"
     )
     membed.add_field(name="Message", value=message, inline=False)
     await user.send(embeds=membed)
