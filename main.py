@@ -168,17 +168,58 @@ async def joke(ctx: SlashContext):
     name="help",
     description="Lists all available commands along with short description on how to use them."
 )
-async def help(ctx: SlashContext):
+@slash_option(
+    name="command",
+    description="The command to get help for",
+    required=False,
+    OptionType=OptionType.STRING
+)
+
+async def help(ctx: SlashContext, command: str = None):
     """Command to list all available commands along with short description on how to use them."""
-    embed = Embed(
-        title="Help",
-        description="Here are all available commands:\n"
-                    "/hello: Greet users with a personalized message.\n"
-                    "/ping: Check the bot's latency.\n"
-                    "/qr: Create QR codes from text or links, with optional logo support.\n"
-                    "/timer: Create a random timer between 1 and 60 seconds.\n"
-                    "/joke: Tells a programming joke.",
-        color=interactions.Color.random())
-    await ctx.send(embeds=embed)
+    if command == "hello":
+        embed = Embed(
+            title="Hello Command",
+            description="Greet users with a personalized message. \n Usage: /hello \n example: /hello \n output: Hello <user>!",
+            color=interactions.Color.random())
+    elif command == "ping":
+        embed = Embed(
+            title="Ping Command",
+            description="Check the bot's latency. \n Usage: /ping \n example: /ping \n output: Pong! <latency>ms",
+            color=interactions.Color.random())
+    elif command == "qr":
+        embed = Embed(
+            title="QR Code Generator",
+            description="Create QR codes from text or links, with optional logo support. \n Usage: /qr <link> \n example: /qr https://example.com \n output: QR code for https://example.com",
+            color=interactions.Color.random())
+    elif command == "timer":
+        embed = Embed(
+            title="Timer Command",
+            description="Create a random timer between 1 and 60 seconds. \n Usage: /timer \n example: /timer \n output: Timer created for <random time> seconds",
+            color=interactions.Color.random())
+    elif command == "joke":
+        embed = Embed(
+            title="Joke Command",
+            description="Tells a programming joke. \n Usage: /joke \n example: /joke \n output: Joke",
+            color=interactions.Color.random())
+    else:
+        embed = Embed(
+            title="Help",
+            description="Here are all available commands:\n"
+                        "/hello: Greet users with a personalized message.\n"
+                        "/ping: Check the bot's latency.\n"
+                        "/qr: Create QR codes from text or links, with optional logo support.\n"
+                        "/timer: Create a random timer between 1 and 60 seconds.\n"
+                        "/joke: Tells a programming joke.",
+            color=interactions.Color.random())
+        await ctx.send(embeds=embed)
+
+@slash_command(
+    name="invite",
+    description="Invite the bot to your server."
+)
+async def invite(ctx: SlashContext):
+    """Command to invite the bot to your server."""
+    await ctx.send(f"Invite the bot to your server with this link: {await ctx.bot.get_invite()}")
 # Start the bot
 bot.start()
