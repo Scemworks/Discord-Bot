@@ -20,8 +20,8 @@ A Discord bot built with the `interactions.py` library that provides various com
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/Scemworks/Discord-Bot.git
+   cd Discord-Bot
    ```
 
 2. **Install required packages**:
