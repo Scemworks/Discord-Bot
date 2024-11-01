@@ -229,6 +229,7 @@ async def fortune(ctx: SlashContext):
         description=random.choice(fortunes),
         color=interactions.Color.random()
     )
+    embed.set_footer(text=f"Requested by {ctx.author}\n{datetime.datetime.now()}")
     await ctx.send(embeds=embed)
 
 # Start the bot
