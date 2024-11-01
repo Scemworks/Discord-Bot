@@ -202,5 +202,34 @@ async def invite(ctx: SlashContext):
     inembed.add_field(name="Invite Link", value=f"[Click Here](https://discord.com/oauth2/authorize?client_id=943175577265905745&permissions=8&integration_type=0&scope=bot)", inline=False)
     await ctx.send(embeds=inembed)
 
+# Digital Random Fortune Generator command
+@slash_command(
+    name="fortune",
+    description="Generates a random fortune."
+)
+async def fortune(ctx: SlashContext):
+    """Command to generate a random fortune."""
+    fortunes = [
+        "You will have a bright future.",
+        "You will be successful.",
+        "You will find love.",
+        "You will be loved.",
+        "You will have success.",
+        "You will receive a gift.",
+        "You will be a successful millionaire.",
+        "You will be rich.",
+        "You will have a great life.",
+        "You will land your dream job.",
+        "You will marry the person you love.",
+        "You will marry, have kids, and live a happy life.",
+    ]
+
+    embed = Embed(
+        title="Fortune",
+        description=random.choice(fortunes),
+        color=interactions.Color.random()
+    )
+    await ctx.send(embeds=embed)
+
 # Start the bot
 bot.start()
