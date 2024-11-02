@@ -25,8 +25,8 @@ ntfy = Notifier(notify_defaults={
     "priority": '5'
 })
 
-def notify(message):
-    ntfy.notify(message)
+def notify(title, message):
+    ntfy.notify(title=title, message=message)
 
 # Create a new bot instance with default intents
 bot = Client(intents=Intents.DEFAULT, token=token)
