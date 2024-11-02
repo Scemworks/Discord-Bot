@@ -338,5 +338,18 @@ async def notify(ctx: SlashContext, message: str):
     notify(message)
     await ctx.send("Notification sent!")
 
+@slash_command(
+    name="restart",
+    description="Restarts the bot."
+    '''Only usable by the bot owner.'''
+)
+async def restart(ctx: SlashContext):
+    """Command to restart the bot."""
+    if ctx.author.id == bot.owner_id:
+        await ctx.send("Restarting...")
+        os.execl(sys.executable, sys.executable, *sys.argv)
+    else:
+        await ctx.send("Only the bot owner can use this command.")
+
 # Start the bot
 bot.start()
