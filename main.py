@@ -22,7 +22,7 @@ token = os.getenv("TOKEN")
 # 
 ntfy = Notifier(notify_defaults={
     "title": "Discord Bot",
-    "sound": "default"
+    "priority": 5
 })
 
 def notify(title, message):
