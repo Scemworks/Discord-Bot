@@ -22,11 +22,11 @@ token = os.getenv("TOKEN")
 # 
 ntfy = Notifier(notify_defaults={
     "title": "Discord Bot",
-    "priority": 5
+    "priority": '5'
 })
 
-def notify(title, message):
-    ntfy.notify(title=title, message=message)
+def notify(message):
+    ntfy.notify(message)
 
 # Create a new bot instance with default intents
 bot = Client(intents=Intents.DEFAULT, token=token)
