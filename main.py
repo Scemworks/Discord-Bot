@@ -25,8 +25,8 @@ ntfy = Notifier(notify_defaults={
     "priority": '5'
 })
 
-def notify(title, message):
-    ntfy.notify(title=title, message=message)
+def notify( message):
+    ntfy.notify(message)
 
 # Create a new bot instance with default intents
 bot = Client(intents=Intents.DEFAULT, token=token)
@@ -326,21 +326,16 @@ async def cat(ctx: SlashContext):
     name="notify",
     description="Sends a notification to your phone."
 )
-@slash_option(
-    name="title",
-    description="Title of the notification",
-    opt_type=OptionType.STRING,
-    required=True
-)
+
 @slash_option(
     name="message",
     description="Message of the notification",
     opt_type=OptionType.STRING,
     required=True
 )
-async def notify(ctx: SlashContext, title: str, message: str):
+async def notify(ctx: SlashContext, message: str):
     """Command to send a notification to your phone."""
-    notify(title, message)
+    notify(message)
     await ctx.send("Notification sent!")
 
 # Start the bot
