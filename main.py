@@ -8,13 +8,25 @@ import os  # Import os for environment variable access
 import datetime  # Import datetime for date and time handling
 import random  # Import random for generating random numbers
 import asyncio  # Import asyncio for asynchronous programming
-
+import ntfy_wrapper  # Import ntfy-wrapper for sending notifications to ntfy server
+from ntfy_wrapper import*
+import requests  # Import requests for making HTTP requests
+import xkcdpass  # Import xkcdpass for generating human friendly topics
 # Load environment variables from a .env file
 from dotenv import load_dotenv
 load_dotenv()
 
 # Get the bot token from environment variables
 token = os.getenv("TOKEN")
+
+# 
+ntfy = Notifier(notify_defaults={
+    "title": "Discord Bot",
+    "sound": "default"
+})
+
+def notify(title, message):
+    ntfy.notify(title=title, message=message)
 
 # Create a new bot instance with default intents
 bot = Client(intents=Intents.DEFAULT, token=token)
@@ -308,5 +320,28 @@ async def cat(ctx: SlashContext):
                 cat_embed.add_field(name="Fact", value=fact, inline=False)
                 cat_embed.set_image(url=cat["url"])
     await ctx.send(embeds=cat_embed)
+
+
+@slash_command(
+    name="notify",
+    description="Sends a notification to your phone."
+)
+@slash_option(
+    name="title",
+    description="Title of the notification",
+    opt_type=OptionType.STRING,
+    required=True
+)
+@slash_option(
+    name="message",
+    description="Message of the notification",
+    opt_type=OptionType.STRING,
+    required=True
+)
+async def notify(ctx: SlashContext, title: str, message: str):
+    """Command to send a notification to your phone."""
+    notify(title, message)
+    await ctx.send("Notification sent!")
+
 # Start the bot
 bot.start()
